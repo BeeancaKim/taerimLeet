@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김태림의 국어 자료실</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            DEFAULT: '#0a1a35',
+                            dark: '#050d1a',
+                        },
+                        forsythia: {
+                            DEFAULT: '#FFB100',
+                            hover: '#E6A000',
+                        },
+                        burgundy: {
+                            DEFAULT: '#7A1B2E',
+                            hover: '#5e1523',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap');
+        body { font-family: 'Pretendard', sans-serif; letter-spacing: -0.02em; }
+        .active-section { display: block; }
+        .hidden-section { display: none; }
+        .pdf-container { height: calc(100vh - 300px); min-height: 600px; }
+        
+        /* Dropdown Animation */
+        #curriculum-dropdown { 
+            transition: all 0.2s ease-in-out;
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+        }
+        #curriculum-dropdown.open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #0a1a35; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="bg-navy text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-20">
+                <div class="text-2xl font-bold tracking-tight cursor-pointer flex items-center group" onclick="showSection('home')">
+                    <div class="w-10 h-10 bg-burgundy flex items-center justify-center rounded-lg mr-3 group-hover:bg-forsythia transition-colors">
+                        <span class="text-white font-black text-sm">KTR</span>
+                    </div>
+                    <span>김태림의 <span class="text-forsythia">자료실</span></span>
+                </div>
+                <div class="hidden md:flex space-x-10 font-bold text-sm uppercase tracking-wider">
+                    <button onclick="showSection('home')" class="hover:text-forsythia transition-colors border-b-2 border-transparent hover:border-forsythia pb-1">HOME</button>
+                    <button onclick="showSection('abcd')" class="hover:text-forsythia transition-colors border-b-2 border-transparent hover:border-forsythia pb-1">독해의 ABCD</button>
+                    <button onclick="showSection('files')" class="hover:text-forsythia transition-colors border-b-2 border-transparent hover:border-forsythia pb-1">배포 자료</button>
+                </div>
+                <div class="md:hidden text-2xl cursor-pointer"><i class="fa-solid fa-bars"></i></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        
+        <!-- Section: Home -->
+        <section id="home" class="active-section space-y-10 animate-fade-in">
+            <div class="bg-navy rounded-3xl p-12 text-white shadow-2xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <div class="inline-block bg-burgundy px-4 py-1 rounded-full text-xs font-bold mb-6 tracking-widest text-forsythia">LEET & KOREAN ARCHIVE</div>
+                    <h1 class="text-4xl md:text-5xl font-extrabold mb-4 leading-tight">안녕하세요, <br class="md:hidden"><span class="text-forsythia">김태림</span>입니다.</h1>
+                    <p class="text-slate-300 text-lg max-w-2xl leading-relaxed font-medium">
+                        법학적 사고와 국어 독해의 정수를 정리한 아카이브입니다.<br>
+                        지나간 강의 자료와 보충 콘텐츠를 이곳에서 자유롭게 조회하세요.
+                    </p>
+                </div>
+                <div class="absolute right-[-5%] bottom-[-20%] text-[18rem] font-bold text-white/5 select-none italic">KTR</div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:border-burgundy/30 transition-all hover:shadow-xl group">
+                    <div class="w-14 h-14 bg-burgundy rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-burgundy/20 group-hover:scale-110 transition-transform">
+                        <span class="text-white font-bold text-xl leading-none">ABCD</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 text-navy">독해의 ABCD</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed text-sm font-medium">기초 독해부터 심화 구조화까지, 김태림 강사만의 단계별 핵심 커리큘럼을 전용 뷰어로 제공합니다.</p>
+                    <button onclick="showSection('abcd')" class="inline-flex items-center text-burgundy font-bold hover:gap-3 transition-all">
+                        교재 바로가기 <i class="fa-solid fa-chevron-right ml-2 text-sm"></i>
+                    </button>
+                </div>
+                <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:border-forsythia/30 transition-all hover:shadow-xl group">
+                    <div class="w-14 h-14 bg-forsythia rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-forsythia/20 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-folder-open text-navy text-xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-4 text-navy">배포 자료실</h2>
+                    <p class="text-slate-600 mb-8 leading-relaxed text-sm font-medium">기출 분석 자료 및 특강 핸드아웃 등 수업 효율을 높여줄 모든 보조 자료를 체계적으로 정리했습니다.</p>
+                    <button onclick="showSection('files')" class="inline-flex items-center text-forsythia-hover font-bold hover:gap-3 transition-all">
+                        자료 리스트 확인 <i class="fa-solid fa-chevron-right ml-2 text-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 독해의 ABCD (Viewer) -->
+        <section id="abcd" class="hidden-section">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                <!-- Dropdown Header -->
+                <div class="bg-navy p-6 flex flex-col sm:flex-row justify-between items-center gap-6">
+                    <div class="relative w-full sm:w-80">
+                        <button onclick="toggleDropdown()" id="dropdown-btn" class="w-full bg-white/10 text-white px-6 py-4 rounded-xl flex justify-between items-center hover:bg-white/20 transition-all font-bold border border-white/20">
+                            <span id="selected-vol-text">Vol. 1 기초 독해법</span>
+                            <i class="fa-solid fa-chevron-down text-forsythia ml-4 transition-transform" id="dropdown-icon"></i>
+                        </button>
+                        <!-- Dropdown List -->
+                        <ul id="curriculum-dropdown" class="absolute top-full left-0 w-full bg-white shadow-2xl rounded-xl mt-3 py-2 z-[60] border border-slate-200">
+                            <li><button onclick="loadPdf('Vol. 1 기초 독해법', 'pdf/abcd_vol1.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 1 기초 독해법</button></li>
+                            <li><button onclick="loadPdf('Vol. 2 문장 구조화', 'pdf/abcd_vol2.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 2 문장 구조화</button></li>
+                            <li><button onclick="loadPdf('Vol. 3 거시적 독해', 'pdf/abcd_vol3.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 3 거시적 독해</button></li>
+                            <li><button onclick="loadPdf('Vol. 4 실전 적용', 'pdf/abcd_vol4.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 4 실전 적용</button></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <span class="hidden lg:inline text-slate-400 text-xs font-bold uppercase tracking-widest">Reader Mode Activated</span>
+                        <a id="download-btn" href="pdf/abcd_vol1.pdf" download class="bg-forsythia text-navy px-8 py-4 rounded-xl text-sm font-bold hover:bg-forsythia-hover transition-all shadow-lg shadow-forsythia/20 flex items-center">
+                            <i class="fa-solid fa-download mr-3"></i>파일 다운로드
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Viewer Area -->
+                <div class="p-4 sm:p-8">
+                    <div class="pdf-container bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
+                        <iframe id="pdf-viewer" src="pdf/abcd_vol1.pdf" width="100%" height="100%" style="border: none;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: 배포 자료 (Table) -->
+        <section id="files" class="hidden-section">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-10 border-b bg-slate-50 flex justify-between items-end">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-2 h-6 bg-burgundy"></div>
+                            <h2 class="text-3xl font-bold text-navy">배포 자료 아카이브</h2>
+                        </div>
+                        <p class="text-slate-500 text-sm font-semibold uppercase tracking-widest ml-5">Supplementary Materials</p>
+                    </div>
+                    <div class="hidden sm:block text-right">
+                        <span class="text-3xl font-black text-navy/10 leading-none">DOCS</span>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-navy text-white text-xs uppercase tracking-widest">
+                            <tr>
+                                <th class="px-10 py-6 font-bold">Category</th>
+                                <th class="px-10 py-6 font-bold">Title</th>
+                                <th class="px-10 py-6 font-bold">Registration Date</th>
+                                <th class="px-10 py-6 font-bold text-center">Download</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 font-medium">
+                            <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-1').click()">
+                                <td class="px-10 py-6">
+                                    <span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">Archive</span>
+                                </td>
+                                <td class="px-10 py-6">
+                                    <a id="dl-1" href="pdf/sample_1.pdf" download class="text-navy group-hover:text-burgundy transition-colors">2024학년도 LEET 언어이해 총평 및 고득점 전략 자료</a>
+                                </td>
+                                <td class="px-10 py-6 text-slate-400 text-sm font-mono italic">2024.10.25</td>
+                                <td class="px-10 py-6 text-center">
+                                    <i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-2').click()">
+                                <td class="px-10 py-6">
+                                    <span class="bg-navy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">Lecture</span>
+                                </td>
+                                <td class="px-10 py-6">
+                                    <a id="dl-2" href="pdf/sample_2.pdf" download class="text-navy group-hover:text-burgundy transition-colors">현대 철학 지문 배경지식 정리 핵심 가이드 PDF</a>
+                                </td>
+                                <td class="px-10 py-6 text-slate-400 text-sm font-mono italic">2024.09.12</td>
+                                <td class="px-10 py-6 text-center">
+                                    <i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-3').click()">
+                                <td class="px-10 py-6">
+                                    <span class="bg-slate-400 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">Special</span>
+                                </td>
+                                <td class="px-10 py-6">
+                                    <a id="dl-3" href="pdf/sample_3.pdf" download class="text-navy group-hover:text-burgundy transition-colors">논리학 기초 3시간 완성 핸드아웃 (무료 배포용)</a>
+                                </td>
+                                <td class="px-10 py-6 text-slate-400 text-sm font-mono italic">2024.08.05</td>
+                                <td class="px-10 py-6 text-center">
+                                    <i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 py-16 bg-navy text-slate-400 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
+                    <div class="w-8 h-8 bg-burgundy rounded flex items-center justify-center">
+                        <span class="text-white font-black text-xs">KTR</span>
+                    </div>
+                    <p class="font-bold text-slate-200">김태림의 국어 자료실</p>
+                </div>
+                <p class="text-sm">본 사이트의 모든 자료의 무단 전재 및 배포를 금합니다.</p>
+                <p class="text-xs mt-2">&copy; 2025 Taerim Kim's Archive. All rights reserved.</p>
+            </div>
+            <div class="flex space-x-8 text-2xl">
+                <a href="#" class="hover:text-forsythia transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" class="hover:text-forsythia transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-forsythia transition-colors"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 페이지 전환 함수
+        function showSection(sectionId) {
+            document.querySelectorAll('main > section').forEach(section => {
+                section.classList.remove('active-section');
+                section.classList.add('hidden-section');
+            });
+            document.getElementById(sectionId).classList.remove('hidden-section');
+            document.getElementById(sectionId).classList.add('active-section');
+            
+            // 내비게이션 활성화 시각화 처리 (간소화)
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // 드롭다운 토글 함수
+        function toggleDropdown() {
+            const dropdown = document.getElementById('curriculum-dropdown');
+            const icon = document.getElementById('dropdown-icon');
+            dropdown.classList.toggle('open');
+            icon.style.transform = dropdown.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        // PDF 뷰어 로드 함수
+        function loadPdf(title, url) {
+            document.getElementById('selected-vol-text').innerText = title;
+            document.getElementById('pdf-viewer').src = url;
+            document.getElementById('download-btn').href = url;
+            
+            // 드롭다운 닫기
+            toggleDropdown();
+        }
+
+        // 외부 클릭 시 드롭다운 닫기
+        window.onclick = function(event) {
+            if (!event.target.closest('#dropdown-btn') && !event.target.closest('#curriculum-dropdown')) {
+                const dropdown = document.getElementById('curriculum-dropdown');
+                const icon = document.getElementById('dropdown-icon');
+                if (dropdown.classList.contains('open')) {
+                    dropdown.classList.remove('open');
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
