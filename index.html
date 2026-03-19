@@ -249,14 +249,27 @@
         }
 
         // PDF 뷰어 로드 함수
-        function loadPdf(title, url) {
-            document.getElementById('selected-vol-text').innerText = title;
-            document.getElementById('pdf-viewer').src = ur + "#toolbar=1&navpanes=0";
-            document.getElementById('download-btn').href = url;
-            
-            // 드롭다운 닫기
-            toggleDropdown();
-        }
+function loadPdf(title, url) {
+    const viewer = document.getElementById('pdf-viewer');
+    const titleElement = document.getElementById('selected-vol-text');
+    const downloadBtn = document.getElementById('download-btn');
+
+    // 1. 상단 텍스트 변경
+    if(titleElement) titleElement.innerText = title;
+    
+    // 2. 다운로드 버튼 링크 변경
+    if(downloadBtn) downloadBtn.href = url;
+
+    // 3. [핵심] 뷰어를 한 번 비웠다가 0.01초 뒤에 새 주소를 넣습니다.
+    // 이렇게 하면 브라우저가 '새로운 파일이 왔구나!' 하고 강제로 다시 그립니다.
+    viewer.src = ""; 
+    setTimeout(() => {
+        viewer.src = url + "#toolbar=1&navpanes=0";
+    }, 10);
+
+    // 4. 드롭다운 닫기
+    toggleDropdown();
+}
 
         // 외부 클릭 시 드롭다운 닫기
         window.onclick = function(event) {
