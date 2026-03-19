@@ -251,7 +251,7 @@
         // PDF 뷰어 로드 함수
         function loadPdf(title, url) {
             document.getElementById('selected-vol-text').innerText = title;
-            document.getElementById('pdf-viewer').src = url;
+            document.getElementById('pdf-viewer').src = ur + "#toolbar=1&navpanes=0";
             document.getElementById('download-btn').href = url;
             
             // 드롭다운 닫기
