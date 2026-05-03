@@ -56,7 +56,6 @@
 </head>
 <body class="bg-slate-50 text-slate-900">
 
-    <!-- Navigation -->
     <nav class="bg-navy text-white shadow-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex justify-between items-center h-20">
@@ -76,10 +75,8 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-6 py-12">
         
-        <!-- Section: Home -->
         <section id="home" class="active-section space-y-10 animate-fade-in">
             <div class="bg-navy rounded-3xl p-12 text-white shadow-2xl relative overflow-hidden">
                 <div class="relative z-10">
@@ -116,46 +113,87 @@
             </div>
         </section>
 
-        <!-- Section: 독해의 ABCD (Viewer) -->
         <section id="abcd" class="hidden-section">
             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
-                <!-- Dropdown Header -->
-                <div class="bg-navy p-6 flex flex-col sm:flex-row justify-between items-center gap-6">
-                    <div class="relative w-full sm:w-80">
-                        <button onclick="toggleDropdown()" id="dropdown-btn" class="w-full bg-white/10 text-white px-6 py-4 rounded-xl flex justify-between items-center hover:bg-white/20 transition-all font-bold border border-white/20">
-                            <span id="selected-vol-text">회차 선택</span>
-                            <i class="fa-solid fa-chevron-down text-forsythia ml-4 transition-transform" id="dropdown-icon"></i>
-                        </button>
-                        <!-- Dropdown List -->
-                        <ul id="curriculum-dropdown" class="absolute top-full left-0 w-full bg-white shadow-2xl rounded-xl mt-3 py-2 z-[60] border border-slate-200">
-                            <li><button onclick="loadPdf('Vol. 1', 'pdf/abcd_vol1.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 1</button></li>
-                            <li><button onclick="loadPdf('Vol. 2', 'pdf/abcd_vol2.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 2</button></li>
-                            <li><button onclick="loadPdf('Vol. 3', 'pdf/abcd_vol3.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 3</button></li>
-                            <li><button onclick="loadPdf('Vol. 4', 'pdf/abcd_vol4.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 4</button></li>
-                            <li><button onclick="loadPdf('Vol. 5', 'pdf/abcd_vol5.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 5</button></li>
-                            <li><button onclick="loadPdf('Vol. 6', 'pdf/abcd_vol6.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 6</button></li>
-                            <li><button onclick="loadPdf('Vol. 7', 'pdf/abcd_vol7.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 7</button></li>
-                        </ul>
+                
+                <div class="flex border-b border-slate-200 bg-slate-50">
+                    <button onclick="switchAbcdTab('pdf')" id="tab-pdf" class="flex-1 py-4 text-center font-bold text-navy border-b-2 border-navy transition-all">정규 볼륨 (PDF)</button>
+                    <button onclick="switchAbcdTab('daily')" id="tab-daily" class="flex-1 py-4 text-center font-bold text-slate-400 border-b-2 border-transparent hover:text-navy transition-all">하루 한 장 (Web)</button>
+                </div>
+
+                <div id="abcd-pdf-content" class="block">
+                    <div class="bg-navy p-6 flex flex-col sm:flex-row justify-between items-center gap-6">
+                        <div class="relative w-full sm:w-80">
+                            <button onclick="toggleDropdown()" id="dropdown-btn" class="w-full bg-white/10 text-white px-6 py-4 rounded-xl flex justify-between items-center hover:bg-white/20 transition-all font-bold border border-white/20">
+                                <span id="selected-vol-text">회차 선택</span>
+                                <i class="fa-solid fa-chevron-down text-forsythia ml-4 transition-transform" id="dropdown-icon"></i>
+                            </button>
+                            <ul id="curriculum-dropdown" class="absolute top-full left-0 w-full bg-white shadow-2xl rounded-xl mt-3 py-2 z-[60] border border-slate-200">
+                                <li><button onclick="loadPdf('Vol. 1', 'pdf/abcd_vol1.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 1</button></li>
+                                <li><button onclick="loadPdf('Vol. 2', 'pdf/abcd_vol2.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 2</button></li>
+                                <li><button onclick="loadPdf('Vol. 3', 'pdf/abcd_vol3.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 3</button></li>
+                                <li><button onclick="loadPdf('Vol. 4', 'pdf/abcd_vol4.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 4</button></li>
+                                <li><button onclick="loadPdf('Vol. 5', 'pdf/abcd_vol5.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 5</button></li>
+                                <li><button onclick="loadPdf('Vol. 6', 'pdf/abcd_vol6.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 6</button></li>
+                                <li><button onclick="loadPdf('Vol. 7', 'pdf/abcd_vol7.pdf')" class="w-full text-left px-6 py-3 hover:bg-slate-100 transition-colors font-semibold text-sm">Vol. 7</button></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <span class="hidden lg:inline text-slate-400 text-xs font-bold uppercase tracking-widest">Reader Mode Activated</span>
+                            <a id="download-btn" href="pdf/abcd_vol1.pdf" download class="bg-forsythia text-navy px-8 py-4 rounded-xl text-sm font-bold hover:bg-forsythia-hover transition-all shadow-lg shadow-forsythia/20 flex items-center">
+                                <i class="fa-solid fa-download mr-3"></i>파일 다운로드
+                            </a>
+                        </div>
                     </div>
-                    
-                    <div class="flex items-center gap-4">
-                        <span class="hidden lg:inline text-slate-400 text-xs font-bold uppercase tracking-widest">Reader Mode Activated</span>
-                        <a id="download-btn" href="pdf/abcd_vol1.pdf" download class="bg-forsythia text-navy px-8 py-4 rounded-xl text-sm font-bold hover:bg-forsythia-hover transition-all shadow-lg shadow-forsythia/20 flex items-center">
-                            <i class="fa-solid fa-download mr-3"></i>파일 다운로드
-                        </a>
+                    <div class="p-4 sm:p-8">
+                        <div class="pdf-container bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
+                            <iframe id="pdf-viewer" src="pdf/abcd_vol1.pdf" width="100%" height="100%" style="border: none;"></iframe>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Viewer Area -->
-                <div class="p-4 sm:p-8">
-                    <div class="pdf-container bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 shadow-inner">
-                        <iframe id="pdf-viewer" src="pdf/abcd_vol1.pdf" width="100%" height="100%" style="border: none;"></iframe>
+                <div id="abcd-daily-content" class="hidden bg-slate-50 p-6 sm:p-10 min-h-[600px]">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="w-2 h-6 bg-burgundy"></div>
+                        <h3 class="text-2xl font-bold text-navy">하루 한 장 낱장 독해</h3>
+                        <p class="text-slate-500 text-sm ml-2 hidden sm:block font-medium">가볍게 읽고 깊게 생각하는 행간독해 훈련</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+                            <button onclick="toggleAccordion(this)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-slate-50 transition-colors">
+                                <div class="flex items-center">
+                                    <span class="bg-navy text-white px-3 py-1 rounded-full text-xs font-bold mr-4">#002</span>
+                                    <span class="font-bold text-navy text-lg">대조와 비교 구조 한눈에 파악하기</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300 transform-icon"></i>
+                            </button>
+                            <div class="accordion-body hidden px-6 pb-8 pt-4 text-slate-700 text-base leading-loose border-t border-slate-100">
+                                <p class="mb-4 font-medium text-slate-800">지문의 정보량이 많을 때 우리는 '비교'에 집중해야 합니다.</p>
+                                <p>두 대상의 차이점을 묻는 문항은 매년 출제됩니다. 글을 읽을 때 A와 B의 속성이 갈라지는 지점에 반드시 밑줄을 치세요. 특히 '반면', '이와 달리' 같은 표지어는 정답의 핵심 근거가 됩니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+                            <button onclick="toggleAccordion(this)" class="w-full text-left px-6 py-5 flex justify-between items-center hover:bg-slate-50 transition-colors">
+                                <div class="flex items-center">
+                                    <span class="bg-navy text-white px-3 py-1 rounded-full text-xs font-bold mr-4">#001</span>
+                                    <span class="font-bold text-navy text-lg">비문학 독해의 첫걸음: 주어 찾기</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300 transform-icon"></i>
+                            </button>
+                            <div class="accordion-body hidden px-6 pb-8 pt-4 text-slate-700 text-base leading-loose border-t border-slate-100">
+                                <p class="font-medium text-slate-800">문장의 길이가 길어질수록 수험생들은 길을 잃습니다.</p>
+                                <p>그럴 땐 가장 먼저 서술어에 호응하는 '진짜 주어'가 무엇인지부터 잡아야 합니다. 수식어구에 휘둘리지 말고 뼈대를 먼저 보세요.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- Section: 배포 자료 (Table) -->
         <section id="files" class="hidden-section">
             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
                 <div class="p-10 border-b bg-slate-50 flex justify-between items-end">
@@ -181,65 +219,35 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 font-medium">
-                              <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-1').click()">
-                                <td class="px-10 py-6">
-                                    <span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">기출변형</span>
-                                </td>
-                                <td class="px-10 py-6">
-                                    <a id="dl-1" href="pdf/weekly_6.pdf" download class="text-navy group-hover:text-burgundy transition-colors">weekly 행간독해 [6주차]</a>
-                                </td>
+                              <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-6').click()">
+                                <td class="px-10 py-6"><span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">기출변형</span></td>
+                                <td class="px-10 py-6"><a id="dl-6" href="pdf/weekly_6.pdf" download class="text-navy group-hover:text-burgundy transition-colors">weekly 행간독해 [6주차]</a></td>
                                 <td class="px-10 py-6 text-slate-400 text-sm font-mono italic">2026.4.26.</td>
-                                <td class="px-10 py-6 text-center">
-                                    <i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i>
-                                </td>
+                                <td class="px-10 py-6 text-center"><i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i></td>
                             </tr>
-                             <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-1').click()">
-                                <td class="px-10 py-6">
-                                    <span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">기출변형</span>
-                                </td>
-                                <td class="px-10 py-6">
-                                    <a id="dl-1" href="pdf/weekly_5.pdf" download class="text-navy group-hover:text-burgundy transition-colors">weekly 행간독해 [5주차]</a>
-                                </td>
+                            <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-5').click()">
+                                <td class="px-10 py-6"><span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">기출변형</span></td>
+                                <td class="px-10 py-6"><a id="dl-5" href="pdf/weekly_5.pdf" download class="text-navy group-hover:text-burgundy transition-colors">weekly 행간독해 [5주차]</a></td>
                                 <td class="px-10 py-6 text-slate-400 text-sm font-mono italic">2026.4.19.</td>
-                                <td class="px-10 py-6 text-center">
-                                    <i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i>
-                                </td>
+                                <td class="px-10 py-6 text-center"><i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i></td>
                             </tr>
-                              <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-1').click()">
-                                <td class="px-10 py-6">
-                                    <span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">기출변형</span>
-                                </td>
-                                <td class="px-10 py-6">
-                                    <a id="dl-1" href="pdf/weekly_4.pdf" download class="text-navy group-hover:text-burgundy transition-colors">weekly 행간독해 [4주차]</a>
-                                </td>
+                            <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-4').click()">
+                                <td class="px-10 py-6"><span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">기출변형</span></td>
+                                <td class="px-10 py-6"><a id="dl-4" href="pdf/weekly_4.pdf" download class="text-navy group-hover:text-burgundy transition-colors">weekly 행간독해 [4주차]</a></td>
                                 <td class="px-10 py-6 text-slate-400 text-sm font-mono italic">2026.3.27.</td>
-                                <td class="px-10 py-6 text-center">
-                                    <i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i>
-                                </td>
+                                <td class="px-10 py-6 text-center"><i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i></td>
                             </tr>
-                              <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-1').click()">
-                                <td class="px-10 py-6">
-                                    <span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">기출변형</span>
-                                </td>
-                                <td class="px-10 py-6">
-                                    <a id="dl-1" href="pdf/weekly_3.pdf" download class="text-navy group-hover:text-burgundy transition-colors">weekly 행간독해 [3주차]</a>
-                                </td>
+                            <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-3').click()">
+                                <td class="px-10 py-6"><span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">기출변형</span></td>
+                                <td class="px-10 py-6"><a id="dl-3" href="pdf/weekly_3.pdf" download class="text-navy group-hover:text-burgundy transition-colors">weekly 행간독해 [3주차]</a></td>
                                 <td class="px-10 py-6 text-slate-400 text-sm font-mono italic">2026.3.20.</td>
-                                <td class="px-10 py-6 text-center">
-                                    <i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i>
-                                </td>
+                                <td class="px-10 py-6 text-center"><i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i></td>
                             </tr>
-                            <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-1').click()">
-                                <td class="px-10 py-6">
-                                    <span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">기출변형</span>
-                                </td>
-                                <td class="px-10 py-6">
-                                    <a id="dl-1" href="pdf/weekly_2.pdf" download class="text-navy group-hover:text-burgundy transition-colors">weekly 행간독해 [2주차]</a>
-                                </td>
+                            <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-2').click()">
+                                <td class="px-10 py-6"><span class="bg-burgundy text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase">기출변형</span></td>
+                                <td class="px-10 py-6"><a id="dl-2" href="pdf/weekly_2.pdf" download class="text-navy group-hover:text-burgundy transition-colors">weekly 행간독해 [2주차]</a></td>
                                 <td class="px-10 py-6 text-slate-400 text-sm font-mono italic">2026.3.13.</td>
-                                <td class="px-10 py-6 text-center">
-                                    <i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i>
-                                </td>
+                                <td class="px-10 py-6 text-center"><i class="fa-solid fa-circle-down text-2xl text-slate-300 group-hover:text-forsythia transition-colors"></i></td>
                             </tr>
                              <tr class="hover:bg-slate-50 transition-colors group cursor-pointer" onclick="document.getElementById('dl-1').click()">
                                   <td class="px-10 py-6">
@@ -285,8 +293,6 @@
             });
             document.getElementById(sectionId).classList.remove('hidden-section');
             document.getElementById(sectionId).classList.add('active-section');
-            
-            // 내비게이션 활성화 시각화 처리 (간소화)
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
@@ -299,34 +305,65 @@
         }
 
         // PDF 뷰어 로드 함수
-function loadPdf(title, url) {
-    const viewer = document.getElementById('pdf-viewer');
-    const titleElement = document.getElementById('selected-vol-text');
-    const downloadBtn = document.getElementById('download-btn');
+        function loadPdf(title, url) {
+            const viewer = document.getElementById('pdf-viewer');
+            const titleElement = document.getElementById('selected-vol-text');
+            const downloadBtn = document.getElementById('download-btn');
 
-    // 1. 상단 텍스트 변경
-    if(titleElement) titleElement.innerText = title;
-    
-    // 2. 다운로드 버튼 링크 변경
-    if(downloadBtn) downloadBtn.href = url;
+            if(titleElement) titleElement.innerText = title;
+            if(downloadBtn) downloadBtn.href = url;
 
-    // 3. [핵심] 뷰어를 한 번 비웠다가 0.01초 뒤에 새 주소를 넣습니다.
-    // 이렇게 하면 브라우저가 '새로운 파일이 왔구나!' 하고 강제로 다시 그립니다.
-    viewer.src = ""; 
-    setTimeout(() => {
-        viewer.src = url + "#toolbar=1&navpanes=0";
-    }, 10);
+            viewer.src = ""; 
+            setTimeout(() => {
+                viewer.src = url + "#toolbar=1&navpanes=0";
+            }, 10);
 
-    // 4. 드롭다운 닫기
-    toggleDropdown();
-}
+            toggleDropdown();
+        }
+
+        // [신규] 탭 전환 함수
+        function switchAbcdTab(tabName) {
+            const pdfContent = document.getElementById('abcd-pdf-content');
+            const dailyContent = document.getElementById('abcd-daily-content');
+            const tabPdf = document.getElementById('tab-pdf');
+            const tabDaily = document.getElementById('tab-daily');
+
+            if (tabName === 'pdf') {
+                pdfContent.classList.replace('hidden', 'block');
+                dailyContent.classList.replace('block', 'hidden');
+                tabPdf.classList.add('text-navy', 'border-navy');
+                tabPdf.classList.remove('text-slate-400', 'border-transparent');
+                tabDaily.classList.add('text-slate-400', 'border-transparent');
+                tabDaily.classList.remove('text-navy', 'border-navy');
+            } else {
+                pdfContent.classList.replace('block', 'hidden');
+                dailyContent.classList.replace('hidden', 'block');
+                tabDaily.classList.add('text-navy', 'border-navy');
+                tabDaily.classList.remove('text-slate-400', 'border-transparent');
+                tabPdf.classList.add('text-slate-400', 'border-transparent');
+                tabPdf.classList.remove('text-navy', 'border-navy');
+            }
+        }
+
+        // [신규] 아코디언 여닫기 함수
+        function toggleAccordion(btn) {
+            const body = btn.nextElementSibling;
+            const icon = btn.querySelector('.transform-icon');
+            if (body.classList.contains('hidden')) {
+                body.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                body.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
 
         // 외부 클릭 시 드롭다운 닫기
         window.onclick = function(event) {
             if (!event.target.closest('#dropdown-btn') && !event.target.closest('#curriculum-dropdown')) {
                 const dropdown = document.getElementById('curriculum-dropdown');
                 const icon = document.getElementById('dropdown-icon');
-                if (dropdown.classList.contains('open')) {
+                if (dropdown && dropdown.classList.contains('open')) {
                     dropdown.classList.remove('open');
                     icon.style.transform = 'rotate(0deg)';
                 }
